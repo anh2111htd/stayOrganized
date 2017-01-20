@@ -5,12 +5,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user.tasks
-    @open = current_user.tasks.where(state: "open")
-    @wip = current_user.tasks.where(state: "wip")
-    @closed = current_user.tasks.where(state: "closed")
+    if params[:tag]
+      @tasks = current_user.tasks.tagged_with(params[:tag])#.order(created_at:desc)
+    else 
+      @tasks = current_user.tasks
+    end
   end
-
   # GET /tasks/1
   # GET /tasks/1.json
   def show
@@ -73,6 +73,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:content, :state)
+      params.require(:task).permit(:content, :state, :tag_list)
     end
 end

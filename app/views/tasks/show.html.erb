@@ -3,6 +3,7 @@
 <p>
   <strong>Content:</strong>
   <%= @task.content %>
+  <div><%= render @task.tags %></div>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
