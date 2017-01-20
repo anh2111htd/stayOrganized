@@ -1,2 +1,6 @@
 <h1>Tags</h1>
+<div class = "post" >
+  <%= raw task.tags.map{ |t| [t.name, tag_counts[t.id]] }.sort_by{ |t| -t[1] }.
+                    map{ |t| link_to t[0], tag_path(t[0]), class: css_class_for_tag(t[1])}.join(' ') %>
+</div> 
 <%= render @tags %>

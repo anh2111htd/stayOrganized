@@ -10,7 +10,8 @@ class TasksController < ApplicationController
     else 
       @tasks = current_user.tasks
     end
-  end
+
+   end
   # GET /tasks/1
   # GET /tasks/1.json
   def show
