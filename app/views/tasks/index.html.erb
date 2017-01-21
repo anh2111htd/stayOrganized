@@ -1,28 +1,61 @@
-<p id="notice"><%= notice %></p>
+<!-- Navbar goes here -->
 
-<h1>Tasks</h1>
+<!-- Page Layout here -->
+<div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+  <!-- Grey navigation panel
 
-  <tbody>
-    <% @open.each do |task| %>
-      <tr>
-        <td><%= task.content %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Done', change_task_path(task, state: 'done'), method: :put %>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        This content will be:
+    3-columns-wide on large screens,
+    4-columns-wide on medium screens,
+    12-columns-wide on small screens  -->
+  <h6> <b> LABLES </b> </h6> 
+  <% @tags.each do |tag| %>
+        <% @tag_counts.each do |_id, _count| 
+            if tag.id == _id && _count > 0 %>
+            <%= link_to tag.name, tag_path(tag)%>
+            <br>
+        <% end
+          end %>
+  <%end %>
 
-<br>
+</div>
 
-<%= link_to 'New Task', new_task_path,  id: "new_link", remote: true%>
+<div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+  <!-- Teal page content
+
+        This content will be:
+    9-columns-wide on large screens,
+    8-columns-wide on medium screens,
+    12-columns-wide on small screens  -->
+  <p id="notice"><%= notice %></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Content</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @open.each do |task| %>
+          <tr>
+            <td><%= task.content %></td>
+            <td><%= link_to 'Show', task %></td>
+            <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            <td><%= link_to 'Done', change_task_path(task, state: 'done'), method: :put %>
+            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Task', new_task_path,  id: "new_link", remote: true%>
+
+    </div>
+
+</div>

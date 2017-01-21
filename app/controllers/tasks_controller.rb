@@ -13,7 +13,8 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks
       @open = current_user.tasks.where(state: "Open")
     end
-    
+    @tag_counts = ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { taggable_type: "Task", taggable_id: current_user.task_ids }).group("tags.id").count
+    @tags = ActsAsTaggableOn::Tag.all
    end
   # GET /tasks/1
   # GET /tasks/1.json
