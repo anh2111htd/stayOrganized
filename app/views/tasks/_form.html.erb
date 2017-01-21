@@ -1,15 +1,6 @@
-<%= simple_form_for(@task) do |f| %>
-  <%= f.error_notification %>
-  <h2> Content </h2>
-  <div class="form-inputs">
-      <%= f.input :content %>
-      <%= f.date_field :due %>   
-  </div> 
-  <p>
-     <%= f.text_field :tag_list%> 
-	</p>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<%= form_for @task, remote: true do |f| %>
+  <%= f.text_field :content %>
+  <%= f.date_field :due %>   
+  <%= f.text_field :tag_list%> 
+	<%= f.button :submit %>
 <% end %>
