@@ -28,9 +28,8 @@
         This content will be:
     9-columns-wide on large screens,
     8-columns-wide on medium screens,
-    12-columns-wide on small screens  -->
-  <p id="notice"><%= notice %></p>
-
+    12-columns-wide on small screens  --> 
+    <%= link_to 'New Task', new_task_path,  id: "new_link", remote: true%>
     <table>
       <thead>
         <tr>
@@ -51,11 +50,5 @@
         <% end %>
       </tbody>
     </table>
-
-    <br>
-
-    <%= link_to 'New Task', new_task_path,  id: "new_link", remote: true%>
-
-    </div>
-
+   </div>
 </div>
