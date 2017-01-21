@@ -15,6 +15,8 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @d = Date.parse(Time.now.to_s)
+    @distance = @task.due.mjd - @d.mjd
   end
 
   # GET /tasks/new
@@ -74,6 +76,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:content, :state, :tag_list)
+      params.require(:task).permit(:content, :state, :tag_list, :due)
     end
 end

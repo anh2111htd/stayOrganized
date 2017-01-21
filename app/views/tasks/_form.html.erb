@@ -1,9 +1,10 @@
 <%= simple_form_for(@task) do |f| %>
   <%= f.error_notification %>
-
+  <h2> Content </h2>
   <div class="form-inputs">
-    <%= f.input :content %>
-  </div>
+      <%= f.input :content %>
+      <%= f.date_field :due %>   
+  </div> 
   <p>
      <%= f.text_field :tag_list%> 
 	</p>
