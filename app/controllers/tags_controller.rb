@@ -8,5 +8,6 @@ class TagsController < ApplicationController
   def show
     @tag =  ActsAsTaggableOn::Tag.find(params[:id])
     @tasks = current_user.tasks.tagged_with(@tag.name)
+    @open = current_user.tasks.where(state: "Open").tagged_with(@tag.name);
   end
 end

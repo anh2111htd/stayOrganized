@@ -1,18 +1,19 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy, :change]
-
+  respond_to :html
+  respond_to :js
   # GET /tasks
   # GET /tasks.json
   def index
     if params[:tag]
       @tasks = current_user.tasks.tagged_with(params[:tag])#.order(created_at:desc)
-      @open = current_user.tasks.where(state: "Open")
+      @open = current_user.tasks.where(state: "Open").tagged_with(params[:tag]);
     else 
       @tasks = current_user.tasks
       @open = current_user.tasks.where(state: "Open")
     end
-
+    
    end
   # GET /tasks/1
   # GET /tasks/1.json

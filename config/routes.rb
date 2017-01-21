@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :tasks
   devise_for :users, controllers: { sessions: "users/sessions" } 
   get 'pages/home'
-  root 'pages#home'
+  root 'tasks#index'
   Rails.application.routes.draw do
     resources :tags, only: [:index, :show]
 end
