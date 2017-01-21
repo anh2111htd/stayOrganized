@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     resources :tags, only: [:index, :show]
 end
+resources :tasks do
+      member do
+          put :change
+      end
+  end
   # For details onroot 'pages#home' the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,14 +1,16 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :change]
 
   # GET /tasks
   # GET /tasks.json
   def index
     if params[:tag]
       @tasks = current_user.tasks.tagged_with(params[:tag])#.order(created_at:desc)
+      @open = current_user.tasks.where(state: "Open")
     else 
       @tasks = current_user.tasks
+      @open = current_user.tasks.where(state: "Open")
     end
 
    end
@@ -16,8 +18,19 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @d = Date.parse(Time.now.to_s)
-    @distance = @task.due.mjd - @d.mjd
+    if @task.due.nil?
+      @distance = Float::NAN
+    else
+      @distance = @task.due.mjd - @d.mjd
+    end
   end
+
+  def change  
+    @task.update_attributes(state: params[:state])
+    respond_to do |format| 
+      format.html { redirect_to tasks_path, notice: "Task updated"}
+    end
+  end  
 
   # GET /tasks/new
   def new
