@@ -1,5 +1,5 @@
 <%= form_for @task, remote: true do |f| %>
-  <%= f.text_field :content %>
+  <%= f.text_field :content, :autofocus => true %>
   <%= f.date_field :due %>   
   <%= f.text_field :tag_list%> 
 	<%= f.button :submit %>
