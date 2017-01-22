@@ -7,11 +7,11 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params.has_key? (:tag_name)
-      @tasks = current_user.tasks.tagged_with(params[:tag_name])#.order(created_at:desc)
+      @tasks = current_user.tasks.tagged_with(params[:tag_name])
       @open =  current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]);
     else 
-      @tasks = current_user.tasks
-      @open = current_user.tasks.where(state: "Open")
+      @tasks = current_user.tasks.order(:due)
+      @open = current_user.tasks.where(state: "Open").order(:due)
     end
     @tag_counts = ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { taggable_type: "Task", taggable_id: current_user.task_ids }).group("tags.id").count
     @tags = ActsAsTaggableOn::Tag.all
@@ -19,12 +19,6 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @d = Date.parse(Time.now.to_s)
-    if @task.due.nil?
-      @distance = Float::NAN
-    else
-      @distance = @task.due.mjd - @d.mjd
-    end
   end
 
   def change  
