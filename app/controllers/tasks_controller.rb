@@ -9,11 +9,12 @@ class TasksController < ApplicationController
     if params.has_key? (:tag_name)
       @open_due   = current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]).order(:due).select{|task| !task['due'].nil?}
       @open_nodue = current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]).select{|task| task['due'].nil?}
-      @done = current_user.tasks.where(state: "done").tagged_with(params[:tag_name])
+    elsif params.has_key? (:done)
+      @open_due   = current_user.tasks.where(state: "done").order(:due).select{|task| !task['due'].nil?}
+      @open_nodue = current_user.tasks.where(state: "done").select{|task| task['due'].nil?}
     else 
       @open_due   = current_user.tasks.where(state: "Open").order(:due).select{|task| !task['due'].nil?}
       @open_nodue = current_user.tasks.where(state: "Open").select{|task| task['due'].nil?}
-      @done = current_user.tasks.where(state: "done")
     end
     @tag_counts = ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { taggable_type: "Task", taggable_id: current_user.task_ids }).group("tags.id").count
     @tags = ActsAsTaggableOn::Tag.all

@@ -1,9 +1,9 @@
 <%= form_for @task, remote: true do |f| %>
-  <h5> Content </h5>
+  <b>  Content </b>
   <%= f.text_field :content, :autofocus => true %>
-  <h5> Deadline </h5>
+  <b>  Deadline </b>
   <%= f.date_field :due %>   
-  <h5> Tag </h5>
+  <b>  Tag </b>
   <%= f.text_field :tag_list%> 
 	<%= f.button :submit %>
 <% end %>

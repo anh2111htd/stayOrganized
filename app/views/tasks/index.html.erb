@@ -14,7 +14,8 @@
         <% end
           end %>
   <%end %>
-
+  <br><i class="material-icons" style="float:left">view_stream</i><%= link_to ' ALL TASKS', tasks_path%> <br><br>
+  <i class="material-icons" style="float:left">delete</i><%= link_to ' FINISHED TASKS', tasks_path(done: "done")%>
 </div>
 <div class="col s12 l10"> 
     <br>   
