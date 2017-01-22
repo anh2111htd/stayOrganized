@@ -6,9 +6,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    if params[:tag]
-      @tasks = current_user.tasks.tagged_with(params[:tag])#.order(created_at:desc)
-      @open = current_user.tasks.where(state: "Open").tagged_with(params[:tag]);
+    if params.has_key? (:tag_name)
+      @tasks = current_user.tasks.tagged_with(params[:tag_name])#.order(created_at:desc)
+      @open =  current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]);
     else 
       @tasks = current_user.tasks
       @open = current_user.tasks.where(state: "Open")

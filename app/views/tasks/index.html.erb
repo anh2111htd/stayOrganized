@@ -14,7 +14,7 @@
   <% @tags.each do |tag| %>
         <% @tag_counts.each do |_id, _count| 
             if tag.id == _id && _count > 0 %>
-            <%= link_to tag.name, tag_path(tag)%>
+            <%= link_to tag.name, tasks_path(tag_name: tag.name)%>
             <br>
         <% end
           end %>
