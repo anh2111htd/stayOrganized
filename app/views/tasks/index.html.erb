@@ -1,36 +1,35 @@
-<!-- Navbar goes here -->
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Page Layout here -->
 <div class="row">
 
-<div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-  <!-- Grey navigation panel
-
-        This content will be:
-    3-columns-wide on large screens,
-    4-columns-wide on medium screens,
-    12-columns-wide on small screens  -->
-  <h6> <b> LABLES </b> </h6> 
+<div class="col s12 l2"> 
+  <br>
+  <i class="material-icons" style="float:left">label_outline</i>  <h6 style="float:left"> <b> LABLES </b> </h6> 
+  <br><br>
   <% @tags.each do |tag| %>
         <% @tag_counts.each do |_id, _count| 
             if tag.id == _id && _count > 0 %>
-            <%= link_to tag.name, tasks_path(tag_name: tag.name)%>
+            <div class="chip"> <%= link_to tag.name, tasks_path(tag_name: tag.name)%> </div>
             <br>
         <% end
           end %>
   <%end %>
 
 </div>
-<div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
-  <!-- Teal page content
-
-        This content will be:
-    9-columns-wide on large screens,
-    8-columns-wide on medium screens,
-    12-columns-wide on small screens  --> 
-    <%= link_to 'New Task', new_task_path,  id: "new_link", remote: true%><br>
-    <%= render @open %>
-
+<div class="col s12 l10"> 
+    <br>   
+    <div class="chip orange lighten-2"> <%= link_to 'NEW TASK (N)', new_task_path,  id: "new_link", remote: true %> </div>
+    <br>
+    <div class = "row">
+      <div class="col s12 l5">
+        <h5> UPCOMING </h5>
+        <%= render @open_due %>
+      </div>
+      <div class="col s12 l5">
+        <h5> SOMEDAY </h5>
+        <%= render @open_nodue %>
+      </div>
+    </div>
 <script src="/assets/javascripts/keymaster.js"></script>
 <script> key('n', function(){
   document.getElementById("new_link").click();

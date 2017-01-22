@@ -6,17 +6,20 @@
   end                
 %> 
 <div class = "card">
-  <div class = "card-panel lime accent-1">
-    <span style="float: left;">
-      <%= "#{@distance} days left" %> 
-    </span>
-    <span style="float: right;">
-      <%= link_to 'see more', edit_task_path(task) %>
-    </span>
-  </div>
   <div class = "card-content">
+    <b> <%= "#{@distance} days left" %> </b><br>
     <%= task.content %>
   </div>
+   <div class = "card-action">
+    <span style="float: left;">     
+    </span>
+    <span style="float: right; font-size: small; color: gray">
+      <%= link_to 'Destroy', task, method: :delete, remote:true, data: { confirm: 'Are you sure? This action is irreversible.' } %>
+      <%= link_to 'see more', edit_task_path(task) %>
+      <%= link_to 'Done', change_task_path(task, state: 'done'), remote: true, method: :put %>       
+    </span>
+  </div>
+  
 </div>
 
           <!--     
@@ -25,7 +28,6 @@
                  
             </td>
             <td>
-                <%= link_to 'Done', change_task_path(task, state: 'done'), remote: true, method: :put %>
-                <%= link_to 'Destroy', task, method: :delete, remote:true, data: { confirm: 'Are you sure? This action is irreversible.' } %></td>
+                </td>
           
 -->

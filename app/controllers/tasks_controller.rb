@@ -7,11 +7,13 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params.has_key? (:tag_name)
-      @tasks = current_user.tasks.tagged_with(params[:tag_name])
-      @open =  current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]);
+      @open_due   = current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]).order(:due).select{|task| !task['due'].nil?}
+      @open_nodue = current_user.tasks.where(state: "Open").tagged_with(params[:tag_name]).select{|task| task['due'].nil?}
+      @done = current_user.tasks.where(state: "done").tagged_with(params[:tag_name])
     else 
-      @tasks = current_user.tasks.order(:due)
-      @open = current_user.tasks.where(state: "Open").order(:due)
+      @open_due   = current_user.tasks.where(state: "Open").order(:due).select{|task| !task['due'].nil?}
+      @open_nodue = current_user.tasks.where(state: "Open").select{|task| task['due'].nil?}
+      @done = current_user.tasks.where(state: "done")
     end
     @tag_counts = ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { taggable_type: "Task", taggable_id: current_user.task_ids }).group("tags.id").count
     @tags = ActsAsTaggableOn::Tag.all
