@@ -1,8 +1,15 @@
+<title>Stay Organize!</title>
 <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper green accent-3">
         <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down"></ul>
+        <ul class="right hide-on-med-and-down">
+        	<% if current_user %>  
+    			<li><%= link_to 'Edit', edit_user_registration_path %></li>
+    			<li><%= link_to 'Sign out', destroy_user_session_path, method: :delete  %> </li> <% else %>
+    			<li><%= link_to "Sign in", new_user_session_path %></li> 
+			<% end %>  
+		</ul>
       </div>
     </nav>
   </div>
