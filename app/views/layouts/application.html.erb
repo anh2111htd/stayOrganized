@@ -3,14 +3,18 @@
   <head>
     <title>AList</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>    
+    <script>
+      function showToast(message, duration){
+         Materialize.toast(message, duration);
+      }
+    </script>
   </head>
 
   <body>
   	<%= render 'layouts/header' %>
     <%= yield %>
-   <!-- <p class="notice"><%= notice %></p><br><p class="alert"><%= alert %></p> -->
+    <!--  <p class="notice"> <%= notice %></p><br><p class="alert"><%= alert %></p>  -->
   </body>
 </html>

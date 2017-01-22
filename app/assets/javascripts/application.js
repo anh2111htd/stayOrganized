@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
 //<!-- enter to move to the next focusable object(text field) -->
 
 jQuery.extend(jQuery.expr[':'], {
@@ -33,3 +32,4 @@ $(document).on('keypress', 'input,select', function (e) {
         $canfocus.eq(index).focus();
     }
 });
+
