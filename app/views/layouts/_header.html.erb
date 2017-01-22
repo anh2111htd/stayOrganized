@@ -1,15 +1,21 @@
-<title>Stay Organize!</title>
+<title>Stay Organized!</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper green accent-3">
-        <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
+        <a class="brand-logo black-text" style = "font-weight: 400; font-style: italic; text-color: green"> STAY ORGANIZED <i class="material-icons">clear_all</i></a>  
+        <ul class="right hide-on-med-and-down black-text">
+        	<% @status = Status.order("created_at").last %>
+        	<li class="chip black-text green accent-4 margin-top:15px"> <%= @status.name[0..100].gsub(/\s\w+\s*$/, '...')%> </li>
         	<% if current_user %>  
-    			<li><%= link_to 'Edit', edit_user_registration_path %></li>
-    			<li><%= link_to 'Sign out', destroy_user_session_path, method: :delete  %> </li> <% else %>
-    			<li><%= link_to "Sign in", new_user_session_path %></li> 
+        		<li><i class="material-icons">perm_identity</i></li>
+        		<li><a href="/statuses/new" class="black-text">post!</a></li>
+        		<li><a data-method="delete" href="/users/sign_out" class="black-text">SIGN OUT</a></li>
+        		<%else%>
+    			<li><a href="/users/sign_in" class="black-text">SIGN IN</a></li>
 			<% end %>  
 		</ul>
       </div>
     </nav>
   </div>
+    
