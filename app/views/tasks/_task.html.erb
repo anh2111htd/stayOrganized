@@ -1,6 +1,6 @@
 <% @d = Date.parse(Time.now.to_s)
   if task.due.nil?  
-    @distance = "Many "                
+    @distance = "Some "                
   else
     @distance = task.due.mjd - @d.mjd
   end                

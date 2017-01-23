@@ -33,3 +33,7 @@ $(document).on('keypress', 'input,select', function (e) {
     }
 });
 
+$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+        
